@@ -18,19 +18,20 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Get Change Log
+      - name: Get Latest Changes
         id: vars
         run: |
-          # 获取最后一次提交的说明和变动文件
-          COMMIT_MSG=$(git log -1 --pretty=format:"%s")
-          CHANGES=$(git diff --name-only HEAD^ HEAD | head -n 5)
-          
-          echo "MSG_CONTENT=仓库更新通知：
-          内容：$COMMIT_MSG
-          文件：$CHANGES" >> $GITHUB_ENV
+          # 获取 Library 目录下最新变动的文件名
+          DIFF=$(git diff --name-only HEAD^ HEAD | grep "Library/" | head -n 5 || echo "No files changed in Library")
+          echo "CHANGES<<EOF" >> $GITHUB_ENV
+          echo "$DIFF" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
 
-      - name: Send Telegram Message
+      - name: Send Telegram Notification
         run: |
           curl -s -X POST "https://api.telegram.org/bot${{ secrets.TG_BOT_TOKEN }}/sendMessage" \
             -d chat_id="${{ secrets.TG_CHAT_ID }}" \
-            --data-urlencode "text=${{ env.MSG_CONTENT }}"
+            --data-urlencode "text=🔔 仓库更新通知
+          
+          最新变动文件：
+          ${{ env.CHANGES }}"
