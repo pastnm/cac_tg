@@ -10,8 +10,8 @@ jobs:
   cac:
     uses: invalidunit/check_change/.github/workflows/cac_telegram.yml@main
     secrets:
-      TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
-      TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+      _token: ${{ secrets.TG_BOT_TOKEN }}
+      _chap_id: ${{ secrets.TG_CHAT_ID }}
 
   remove_all_old_actions:
     uses: invalidunit/action/.github/workflows/remove_all_actions.yml@main
