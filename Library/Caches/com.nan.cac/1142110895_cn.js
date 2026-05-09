@@ -3,9 +3,9 @@
   "id": 1142110895,
   "bundle": "com.ss.iphone.ugc.Aweme",
   "name": "抖音",
-  "version": "38.6.1",
-  "version_id": 885064027,
-  "version_release_timestamp": "2026-04-30T04:01:51Z",
+  "version": "38.7.0",
+  "version_id": 885420591,
+  "version_release_timestamp": "2026-05-09T07:12:03Z",
   "price": null,
   "image": null
 }
